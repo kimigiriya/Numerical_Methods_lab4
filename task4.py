@@ -2,10 +2,14 @@ import numpy as np
 import general as g
 
 
-def mres(A, f, eps=10**(-4), flag=False, max_iter=10000):
+def mres(A, f, eps=10**(-4), flag=False, max_iter=1000):
     n = len(f)
     A = np.array(A, dtype=float)
     f = np.array(f, dtype=float)
+
+    if not np.allclose(A, A.T):
+        print("Матрица не симметрична!")
+
     if flag:
         print("Задайте начальное приближение")
         x = g.explicit_vector(n)
@@ -53,7 +57,6 @@ try:
     print("Решение СЛАУ x:")
     g.printA(x)
     print(f"Кол-во итераций: {count_iter}")
-    print()
     g.compare_vectors(A, x, f)
 
 except ValueError as e:

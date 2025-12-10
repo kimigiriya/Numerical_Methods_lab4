@@ -9,7 +9,8 @@ def slae_jacobi(A, f, eps=10**(-4), flag=False, max_iter=1000):
 
     for i in range(n):
         if (np.sum(np.abs(A[i])) - np.abs(A[i][i])) > np.abs(A[i][i]):
-            raise ValueError("Матрица без диагонального преобладания!")
+            print("Матрица без диагонального преобладания!")
+            break
 
     if flag:
         print("Задайте начальное приближение")
@@ -40,7 +41,8 @@ def slae_seidel(A, f, eps=10**(-4), flag=False, max_iter=1000):
 
     for i in range(n):
         if (np.sum(np.abs(A[i])) - np.abs(A[i][i])) > np.abs(A[i][i]):
-            raise ValueError("Матрица без диагонального преобладания!")
+            print("Матрица без диагонального преобладания!")
+            break
 
     if flag:
         print("Задайте начальное приближение")
@@ -82,15 +84,14 @@ try:
     print("Решение СЛАУ x:")
     g.printA(x_j)
     print(f"Кол-во итераций: {count_iter_j}")
-    print()
     g.compare_vectors(A, x_j, f)
 
+    print()
     print("---Метод Зейделя---")
     x_s, count_iter_s = slae_seidel(A, f, eps)
     print("Решение СЛАУ x:")
     g.printA(x_s)
     print(f"Кол-во итераций: {count_iter_s}")
-    print()
     g.compare_vectors(A, x_s, f)
 
 except ValueError as e:
